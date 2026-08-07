@@ -1,16 +1,12 @@
 {
-  "crons": [
+  "rewrites": [
     {
-      "path": "/api/cron/sharepoint-sync",
-      "schedule": "*/15 2-12 * * 1-5"
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     },
     {
-      "path": "/api/cron/reminders",
-      "schedule": "30 3 * * 1-5"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
-  ],
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
