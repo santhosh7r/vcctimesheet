@@ -1,0 +1,37 @@
+# Vercel's Hobby plan allows at most 12 Serverless Functions per deployment.
+# api/ contains 22, so the deploy is rejected before it starts.
+#
+# Kept (7) — everything the app or an external service actually calls:
+#   api/cron/reminders.js          <- vercel.json cron
+#   api/cron/sharepoint-sync.js    <- vercel.json cron
+#   api/email/send-report.js       <- fetch() in the reports UI
+#   api/meetings/process-transcript.js <- fetch() in the meetings UI
+#   api/sharepoint/sync.js         <- fetch() in the SharePoint admin UI
+#   api/sow/send-docusign.js       <- fetch() in the SOW workflow
+#   api/sow/docusign-webhook.js    <- DocuSign calls this back
+#
+# Everything below is excluded from the deployment only. The files stay in the
+# repo and keep working locally; drop the relevant line here to bring one back,
+# or move to Pro to lift the limit entirely.
+
+api/cron/leave-scan.js
+api/cron/meeting-notes.js
+
+api/email/send-leave-decision.js
+api/email/send-leave-request.js
+api/email/send-sop.js
+api/email/send-task-notification.js
+
+api/reports/consolidated.js
+
+api/sharepoint/debug.js
+api/sharepoint/status.js
+
+api/sop/approve.js
+api/sop/render.js
+
+api/sow/check-approval.js
+api/sow/docusign-status.js
+api/sow/submit-to-finance.js
+
+api/teams/remind.js
