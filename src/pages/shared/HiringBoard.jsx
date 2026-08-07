@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Briefcase, MapPin, Search, Users, Pencil, Trash2, Plus, X, User, Gift, Send, Upload, FileText } from 'lucide-react';
-import { api, supabase, getFileUrl } from '../../lib/api';
+import { api, supabase, useSupabase, getFileUrl } from '../../lib/api';
 import { useAuth } from '../../context/AuthContext';
 import PageHeader from '../../components/PageHeader';
 import Card from '../../components/Card';
@@ -103,7 +103,6 @@ export default function HiringBoard() {
     // Upload JD file if provided
     if (jdFile && reqId) {
       try {
-        const { supabase, useSupabase } = await import('../../lib/api');
         if (useSupabase && supabase) {
           const storagePath = `requirements/${reqId}/${Date.now()}_${jdFile.name}`;
           await supabase.storage.from('documents').upload(storagePath, jdFile, { contentType: jdFile.type });
@@ -177,7 +176,6 @@ export default function HiringBoard() {
     });
     if (resumeFile && result?.id) {
       try {
-        const { supabase, useSupabase } = await import('../../lib/api');
         if (useSupabase && supabase) {
           const storagePath = `referrals/${result.id}/${Date.now()}_${resumeFile.name}`;
           await supabase.storage.from('documents').upload(storagePath, resumeFile, { contentType: resumeFile.type });
